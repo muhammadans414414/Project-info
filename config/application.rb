@@ -23,6 +23,14 @@ module ProjectInfo
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+  #   config.to_prepare do
+  #     Devise::SessionsController.layout "layouts/devise/devise"
+  #     Devise::RegistrationsController.layout "layouts/Shared/application"
+  # end
+
+  config.to_prepare do
+    Devise::SessionsController.layout proc{ |controller| action_name == 'new' ? "layouts/devise/devise"   : "application" }
+end
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
